@@ -60,21 +60,14 @@ public class Matriz {
         //caso a resposta seja 0
         
         if (resposta == 0) {
-            //varrendo o vetor e pegando a cidade que ele pode viajar (PEGANDO SOMENTE A LINHA)
             for (int i = 0; i < 6; i++) {
-                if (matriz[i][opcao2] != 0) {
-                    j = i;
-                    x = opcao2;
-                    break;
 
-                }
-            }
-            for (int i = 0; i < 6; i++) {
-            //aqui eu varro a linha e pego o valor valido e somo e ja imprimo a resposta
-                if (matriz[j][i] != 0) {
-                    System.out.println("A DISTANCIA É:" + (matriz[j][i] + matriz[j][opcao2]));
-                    break;
-                }
+                    if (matriz[i][opcao2] != 0 && matriz[i][opcao2] != -1){
+                        int result = matriz[i][opcao2] + matriz[i][opcao];
+                        System.out.println("A DISTANCIA É:"+result);
+
+                        break;
+                    }
 
             }
         } else {
