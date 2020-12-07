@@ -1,0 +1,57 @@
+-- endereco: ( id: int, rua: varchar(30), cep: varchar(8), bairro: varchar(100),
+--cidade:varchar(100), uf_estado:varchar(2), complemento:varchar(255));
+-- editora: ( id : int, nome: varchar(100), id_endereco: int referência endereço (id));
+--autor: ( id :int, nome:varchar, id_endereco: int referência endereço(id));
+--livro: ( id : int, titulo:varchar(100), id_editora: int referência editora (id), id_autor: int
+--referência autor (id), categoria:varchar(30));
+-- leitor: ( id : int, nome: varchar(100), id_endereco: referência endereço(id));
+-- empréstimo: ( id : int, data_empresatimo :date, id_leitor: int referência leitor(id),
+--id_livro: int referência livro (id));
+
+create table endereco(
+	endereco_idem SERIAL PRIMARY KEY,
+	endereco_rua VARCHAR(30),
+	endereco_cep VARCHAR(8),
+	endereco_bairro VARCHAR(100),
+	endereco_cidade VARCHAR(100),
+	endereco_uf VARCHAR(2),
+	endereco_complemento VARCHAR(255)
+);
+
+create table editora(
+	editora_idem SERIAL PRIMARY KEY,
+	editora_nome VARCHAR(100),
+	editora_endereco_fk INTEGER,
+	FOREIGN KEY (editora_endereco_fk) REFERENCES endereco (endereco_idem)
+);
+create table autor(
+	autor_idem SERIAL PRIMARY KEY,
+	autor_nome VARCHAR,
+	autor_endereco_fk INTEGER,
+	FOREIGN KEY (autor_endereco_fk) REFERENCES endereco(endereco_idem)
+	
+);
+create table livro(
+	livro_idem SERIAL PRIMARY KEY,
+	livro_titulo VARCHAR(100),
+	livro_categoria VARCHAR(30),
+	livro_editora_fk INTEGER,
+	livro_autor_fk INTEGER,
+	FOREIGN KEY (livro_editora_fk) REFERENCES editora(editora_idem),
+	FOREIGN KEY (livro_autor_fk) REFERENCES autor(autor_idem)
+);
+
+create table leitor(
+	leitor_idem SERIAL PRIMARY KEY,
+	leitor_nome VARCHAR(100),
+	leitor_endereco_fk INTEGER,
+	FOREIGN KEY (leitor_endereco_fk) REFERENCES endereco(endereco_idem)
+);
+create table emprestimo(
+	emprestimo_idem SERIAL PRIMARY KEY,
+	emprestimo_data DATE,
+	emprestimo_leitor_fk INTEGER,
+	emprestimo_livro_fk INTEGER,
+	FOREIGN KEY (emprestimo_leitor_fk) REFERENCES leitor,
+	FOREIGN KEY (emprestimo_livro_fk) REFERENCES livro
+);

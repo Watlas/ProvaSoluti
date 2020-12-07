@@ -65,7 +65,6 @@ public class Matriz {
                     if (matriz[i][opcao2] != 0 && matriz[i][opcao2] != -1){
                         int result = matriz[i][opcao2] + matriz[i][opcao];
                         System.out.println("A DISTANCIA É:"+result);
-
                         break;
                     }
 
